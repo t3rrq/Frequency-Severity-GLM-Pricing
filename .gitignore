@@ -13,8 +13,19 @@ freMTPL2sev.csv
 
 debug-*.log
 
-# Keep the lift chart and holdout metrics on GitHub; regenerate the rest.
+# Keep holdout charts and summary tables on GitHub; regenerate the rest.
 outputs/*
 !outputs/lift_gini.png
+!outputs/lift_gini_annual.png
+!outputs/lift_ranking_comparison.png
+!outputs/relativities.png
+!outputs/calibration_annual_pp.png
+!outputs/oneway_bonusmalusband.png
+!outputs/oneway_drivageband.png
 !outputs/metrics.txt
 !outputs/lift_table.csv
+!outputs/lift_table_annual.csv
+!outputs/relativities.csv
+!outputs/oneway_ave.csv
+!outputs/calibration_annual_pp.csv
+!outputs/analysis_summary.json

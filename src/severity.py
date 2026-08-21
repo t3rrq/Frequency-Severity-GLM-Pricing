@@ -10,13 +10,20 @@ import statsmodels.formula.api as smf
 from src.features import glm_formula
 
 
-def claim_level_severity(freq: pd.DataFrame, sev: pd.DataFrame) -> pd.DataFrame:
+def claim_level_severity(
+    freq: pd.DataFrame,
+    sev: pd.DataFrame,
+    *,
+    cap_quantile: float | None = 0.995,
+) -> pd.DataFrame:
     """One row per claim, with the policy's rating factors attached."""
-    claims = sev.merge(freq.drop(columns=["ClaimNb", "Exposure"]), on="IDpol", how="inner")
+    drop = [c for c in ("ClaimNb", "Exposure") if c in freq.columns]
+    claims = sev.merge(freq.drop(columns=drop), on="IDpol", how="inner")
     claims = claims.loc[claims["ClaimAmount"] > 0].copy()
     # Cap the most extreme tails so a handful of large losses do not dominate Gamma MLE.
-    cap = claims["ClaimAmount"].quantile(0.995)
-    claims["ClaimAmount"] = claims["ClaimAmount"].clip(upper=cap)
+    if cap_quantile is not None:
+        cap = claims["ClaimAmount"].quantile(cap_quantile)
+        claims["ClaimAmount"] = claims["ClaimAmount"].clip(upper=cap)
     return claims
 
 

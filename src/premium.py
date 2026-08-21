@@ -35,8 +35,13 @@ def gini_coefficient(loss: np.ndarray, score: np.ndarray) -> float:
     return float((2.0 * np.sum(i * y) / np.sum(y) - (n + 1)) / n)
 
 
-def lift_table(frame: pd.DataFrame, n_deciles: int = 10) -> pd.DataFrame:
-    work = frame.sort_values("pure_premium", ascending=False).copy()
+def lift_table(
+    frame: pd.DataFrame,
+    n_deciles: int = 10,
+    score_col: str = "pure_premium",
+) -> pd.DataFrame:
+    """Decile lift when policies are ordered by ``score_col`` (higher = riskier)."""
+    work = frame.sort_values(score_col, ascending=False).copy()
     work["decile"] = pd.qcut(np.arange(len(work)), n_deciles, labels=False) + 1
     naive_rate = work["actual_loss"].sum() / work["Exposure"].sum()
     work["naive_premium"] = naive_rate * work["Exposure"]
