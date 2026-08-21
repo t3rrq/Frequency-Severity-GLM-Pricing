@@ -57,7 +57,7 @@ flowchart LR
 - **Actual loss** for scoring is the sum of claim amounts on the policy (0 if none).
 - **Benchmark** — same total holdout loss allocated by exposure only (flat rate per year).
 
-Relativities are \(\exp(\hat\beta)\) versus the treatment reference (bonus-malus 50, driver age 18–20, vehicle age 0, area A, diesel, brand B1, Alsace).
+Relativities are exp($\hat{\beta}$) versus the treatment reference (bonus-malus 50, driver age 18–20, vehicle age 0, area A, diesel, brand B1, Alsace).
 
 ## Holdout ranking
 
