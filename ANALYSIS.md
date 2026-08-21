@@ -15,10 +15,6 @@ For each policy, estimate expected loss from the usual motor rating factors, the
 
 Expected loss is the product of two means, not a single Tweedie GLM:
 
-\[
-\text{pure premium} = E[N] \times E[X \mid \text{claim}].
-\]
-
 `pure_premium` is expected loss over the **observed** exposure. `annual_pure_premium` is that amount divided by exposure (loss per policy-year).
 
 ## Data and clean-up
