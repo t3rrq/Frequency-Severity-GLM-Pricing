@@ -2,7 +2,10 @@
 
 Technical motor TPL premium on the French CASdatasets `freMTPL2` files: a Poisson frequency GLM, a Gamma severity GLM, and pure premium \(E[N] \times E[X \mid \text{claim}]\), scored on a holdout against an exposure-weighted flat rate.
 
-This is a complete baseline, not a rating engine. The write-up is in [ANALYSIS.md](ANALYSIS.md).
+This is a complete baseline, not a rating engine.
+
+- **Not an actuary?** Start with [HOW-IT-WORKS.md](HOW-IT-WORKS.md).
+- **Technical note:** [ANALYSIS.md](ANALYSIS.md).
 
 ## Results (20% holdout)
 

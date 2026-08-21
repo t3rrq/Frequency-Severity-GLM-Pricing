@@ -1,5 +1,7 @@
 # Holdout analysis: frequency–severity GLM on freMTPL2
 
+Plain-language version: [HOW-IT-WORKS.md](HOW-IT-WORKS.md).
+
 This note is the analysis. `run.py` is the pipeline that produced it. The question is whether a two-part technical premium ranks French motor TPL losses on a holdout better than charging everyone the same rate per year of exposure.
 
 It is not a market quote, a filing, or a model bake-off.
