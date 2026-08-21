@@ -10,14 +10,14 @@ The technical write-up is in [ANALYSIS.md](ANALYSIS.md). This page is for anyone
 
 Imagine you run a garage that also sells a promise: “If this car hurts someone, we pay.” You cannot charge every customer the same if some groups crash much more often. You also cannot wait until after the crash to set the price. You need a **guess of the bill before it happens**.
 
-That guess is not the sticker price on a website. It is only the **expected claim cost** — no office expenses, no profit, no discounts. Actuaries call that a *pure premium*. Think of it as “what we think this policy will cost in claims.”
+That guess is not the sticker price on a website. It is only the **expected claim cost** no office expenses, no profit, no discounts. Actuaries call that a *pure premium*. Think of it as “what we think this policy will cost in claims.”
 
 ## Two questions, then multiply
 
-A claim has two parts, like a restaurant bill:
+A claim has two parts
 
-1. **How often** does someone order? (How often does a policy have a claim?)
-2. **How large** is the check when they do? (How many euros is a typical claim?)
+1. **How often** does a policy have a claim?
+2. **How large** is a typical claim?
 
 Expected cost ≈ (expected number of claims) × (expected size of a claim).
 
@@ -27,11 +27,11 @@ We use information already on the policy: area, region, how powerful and how old
 
 ## How we know it is not just a story we told ourselves
 
-We hide **20%** of the policies, build the guess on the other **80%**, then score the hidden group. That is like studying on last year’s customers and grading yourself on next year’s.
+We hide **20%** of the policies, build the guess on the other **80%**, then score the hidden group. That is, we check if there's a pattern on 80% of the data, then use the remaining 20% to confirm the pattern.
 
 We compare to a **flat rate**: take all the claim euros in that hidden group and spread them by how long each policy was in force. A car insured for a full year gets more of the pot than a car insured for a month. That is the “everyone the same per year” baseline.
 
-Then we line people up from “we think you will cost the most” to “we think you will cost the least” and look at **where the real claim euros actually went**.
+Then we line policies up from “we think you will cost the most” to “we think you will cost the least” and look at **where the real claim euros actually went**.
 
 ## What we found
 
