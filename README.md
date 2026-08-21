@@ -11,6 +11,8 @@ This is a complete baseline, not a rating engine.
 
 Ranking by policy expected loss concentrates actual loss better than a flat rate. Gini is **−0.251** vs **−0.168** when ranking by exposure only (more negative is better here: policies are ordered high score first). Top-decile lift is **1.54**.
 
+Loss ratio is 0.90 on the holdout this reflects the severity cap and a known frequency/severity count mismatch in the source data (see [ANALYSIS.md](ANALYSIS.md#caveats)), not model miscalibration; ranking performance is unaffected.
+
 ![Lift chart and Lorenz curve](outputs/lift_gini.png)
 
 | | |
