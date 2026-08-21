@@ -1,0 +1,11 @@
+train_policies=542,410
+test_policies=135,603
+train_claims=21,132
+frequency_deviance=169926.2
+severity_deviance=24566.8
+test_actual_loss=11,055,691
+test_model_premium=12,272,737
+test_naive_premium=11,055,691
+gini_glm=-0.2506
+gini_naive_exposure=-0.1681
+chart=outputs/lift_gini.png
