@@ -2,16 +2,11 @@
 
 Technical motor TPL premium on the French CASdatasets `freMTPL2` files: a Poisson frequency GLM, a Gamma severity GLM, and pure premium \(E[N] \times E[X \mid \text{claim}]\), scored on a holdout against an exposure-weighted flat rate.
 
-This is a small, complete baseline — not a rating engine.
+This is a complete baseline, not a rating engine. The write-up is in [ANALYSIS.md](ANALYSIS.md).
 
-## Specification
+## Results (20% holdout)
 
-- **Frequency** — Poisson GLM, log link, `offset = log(Exposure)`. Claim counts capped at 4 (standard on this file).
-- **Severity** — Gamma GLM, log link, claim-level amounts (0.995 quantile cap) joined to the policy’s rating factors.
-- **Pure premium** — product of the two means on a 20% holdout, stratified on `ClaimNb > 0` so the severity sample is not emptied by chance.
-- **Rating factors** — area, grouped vehicle power/age, driver age, bonus-malus, brand, fuel, region, log density.
-
-## Holdout results
+Ranking by policy expected loss concentrates actual loss better than a flat rate. Gini is **−0.251** vs **−0.168** when ranking by exposure only (more negative is better here: policies are ordered high score first). Top-decile lift is **1.54**.
 
 ![Lift chart and Lorenz curve](outputs/lift_gini.png)
 
@@ -21,22 +16,20 @@ This is a small, complete baseline — not a rating engine.
 | Train claims (severity fit) | 21,132 |
 | Test actual loss | 11.06M |
 | Test model premium | 12.27M |
-| Gini (GLM rank) | −0.251 |
-| Gini (exposure-only) | −0.168 |
+| Loss ratio | 0.90 |
 
-In this Gini implementation, policies are ordered by **decreasing** score; a more negative value means more actual loss sits among the high-score policies. The GLM ranks better than a flat rate.
+Frequency (bonus-malus, driver age) carries most of the rate. Severity factors are mostly weak. Ranking by **annual** premium looks worse because policy expected loss mixes exposure length with risk.
 
-Decile 1 (highest predicted premium) has lift 1.54. The bottom decile is noisy: ranking is by **policy expected loss**, so short-exposure policies collect there and a few large claims inflate the empirical rate.
+## Specification
 
-## Caveats
-
-- On `freMTPL2`, frequency `ClaimNb` often does not equal the number of severity rows for the same `IDpol`. Frequency still uses `ClaimNb`; severity uses observed amounts. They are not forced to match.
-- Severity factors are mostly weak; frequency (especially bonus-malus and driver age) carries most of the rate.
-- Data: Dutang & Charpentier, CASdatasets (`freMTPL2freq` / `freMTPL2sev`). CSVs are not in this repo.
+- **Frequency** — Poisson GLM, log link, `offset = log(Exposure)`. `ClaimNb` capped at 4.
+- **Severity** — Gamma GLM, log link, claim amounts capped at the 0.995 quantile.
+- **Split** — 80/20, stratified on `ClaimNb > 0`.
+- **Factors** — area, grouped vehicle power/age, driver age, bonus-malus, brand, fuel, region, log density.
 
 ## Run
 
-Place `freMTPL2freq.csv` in `data/raw/` (or `Downloads`). The first run fetches `freMTPL2sev.csv` from a Hugging Face mirror if it is missing.
+Place `freMTPL2freq.csv` in `data/raw/` (or `Downloads`). The first run fetches `freMTPL2sev.csv` from a Hugging Face mirror if it is missing. CSVs are not in this repo (Dutang & Charpentier, CASdatasets).
 
 ```bash
 python -m venv .venv
@@ -46,6 +39,4 @@ python -m venv .venv
 .venv/bin/python run.py
 ```
 
-Use the venv interpreter, not a system `python` that never received the packages. Python 3.8 is enough (`matplotlib` 3.7).
-
-Outputs: `outputs/frequency_coefs.csv`, `outputs/severity_coefs.csv`, `outputs/lift_table.csv`, `outputs/metrics.txt`, `outputs/lift_gini.png`.
+Use the venv interpreter. Charts and tables land in `outputs/`.
