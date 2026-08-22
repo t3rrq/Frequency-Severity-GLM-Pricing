@@ -1,6 +1,6 @@
 # Frequency–severity GLM pricing (freMTPL2)
 
-Technical motor TPL premium on the French CASdatasets `freMTPL2` files: a Poisson frequency GLM, a Gamma severity GLM, and pure premium \(E[N] \times E[X \mid \text{claim}]\), scored on a holdout against an exposure-weighted flat rate.
+Technical motor TPL premium on the French CASdatasets `freMTPL2` files: a Poisson frequency GLM, a Gamma severity GLM, and pure premium  \(E[N] \times E[X \mid \text{claim}]\), scored on a holdout against an exposure-weighted flat rate.
 
 This is a complete baseline, not a rating engine.
 
